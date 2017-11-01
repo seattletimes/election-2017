@@ -2,15 +2,15 @@
   "s3": {
     "stage": {
       "bucket": "projects-staging.seattletimes.com",
-      "path": "gutless-magpie"
+      "path": "home-believer"
     },
     "live": {
       "bucket": "projects.seattletimes.com",
-      "path": "2016/election-results"
+      "path": "2017/election-results"
     }
   },
-  "title": "2016 Election Results",
-  "description": "Results for Seattle, surrounding counties, Washington, and national races by The Seattle Times",
+  "title": "2017 Election Results",
+  "description": "Results for Seattle, surrounding counties, and Washington races by The Seattle Times",
   "url": "http://projects.seattletimes.com/2016/election-results/",
   "slug": "",
   "tags": [],
