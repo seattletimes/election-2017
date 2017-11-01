@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+  <head>
+    <title><%= json.project.title %></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="widget.css">
+    <%= t.include("partials/_head.html") %>
+  </head>
+  <body class="pending">
+
+    <responsive-child class="election-widget">
+
+      <img class="banner" src="./assets/star-banner.svg">
+
+      <h2>Local results</h2>
+
+      <div class="races">
+
+        <% election.widget.forEach(function(race) { %>
+        <div class="race">
+          <div class="meta">
+            <h2><%= race.name %></h2>
+          </div>
+          <ul class="results">
+          <% race.results.forEach(function(result) { %>
+            <li>
+              <% if (race.called && race.called == result.candidateID) { %>
+              <span class="checkmark">&#10004;</span>
+              <% } %>
+              <span class="name"><%= result.candidate %></span>
+              <span class="spacer"></span>
+              <span class="percent"><%= result.percent || "0.0" %>%</span>
+          <% }) %>
+          </ul>
+          <% if (race.description) { %>
+          <p class="description"><%= race.description %></p>
+          <% } %>
+        </div>
+        <% }) %>
+      </div>
+
+      <div class="links">
+        <a class="full-results" target="_parent" href="http://projects.seattletimes.com/2016/election-results/">See all results &raquo;</a>
+        Updated: <%= election.updated %>
+      </div>
+    </responsive-child>
+
+    <script src="./widget.js"></script>
+  </body>
+</html>

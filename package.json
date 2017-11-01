@@ -1,0 +1,49 @@
+{
+  "name": "election-2015",
+  "description": "",
+  "version": "0.0.1",
+  "author": "Thomas Wilburn",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/seattletimes/election-2015.git"
+  },
+  "dependencies": {
+    "async": "^1.5.2",
+    "aws-sdk": "^2.6.9",
+    "babelify": "^6.4.0",
+    "browserify": "^10.2.4",
+    "chalk": "^1.0.0",
+    "commonmark": "^0.20.0",
+    "component-responsive-frame": "^1.0.6",
+    "csv": "^0.4.2",
+    "document-register-element": "^0.5.0",
+    "dot": "^1.0.3",
+    "es6-promise": "^3.0.2",
+    "exorcist": "^0.4.0",
+    "google-spreadsheets": "^0.4.1",
+    "grunt": "^1.0.1",
+    "grunt-contrib-connect": "^0.10.1",
+    "grunt-contrib-watch": "^0.6.1",
+    "less": "^2.0.0",
+    "mime": "^1.2.11",
+    "request": "^2.65.0",
+    "savage-image": "0.0.1",
+    "savage-query": "0.0.3",
+    "shelljs": "^0.5.1",
+    "through2": "^2.0.0",
+    "typogr": "^0.6.4"
+  },
+  "browser": {
+    "share": "./src/js/lib/share.min.js",
+    "angular": "angular/angular.min",
+    "jquery": "jquery/dist/jquery.min",
+    "leaflet": "leaflet/dist/leaflet.js",
+    "three": "three/three.min"
+  },
+  "browserify": {
+    "transform": [
+      "./tasks/lib/browserify-less",
+      "./tasks/lib/browserify-text"
+    ]
+  }
+}

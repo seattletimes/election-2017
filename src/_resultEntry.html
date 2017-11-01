@@ -1,0 +1,67 @@
+<%
+var t = grunt.template;
+var synonyms = {
+  yes: "yes",
+  approved: "yes",
+  maintained: "yes",
+  no: "no",
+  rejected: "no",
+  repealed: "no"
+};
+%>
+<div class="result-block">
+  <h3><%= race.name %>
+  <%
+  if (cat == "Congressional") { %>
+    <span class="map-icon">Map
+      <savage-image
+        class="us district"
+        data-src="assets/congress.svg"
+        data-district="<%= race.locator %>"
+        role="img"
+        aria-label="Locator map for this district"></savage-image>
+    </span>
+  <% } %>
+
+  <% if (race.url) { %>
+    <span class="related-story"><a href="<%= race.url %>"> Full coverage</a></span>
+  <% } %>
+
+  </h3>
+
+  <% if (race.description) { %>
+  <p class="description"><%= race.description %></p>
+  <% } %>
+
+  <ul class="results">
+  <% race.results.forEach(function(result, i) { %>
+    <li>
+      <div class="candidate">
+        <%= result.incumbent ? "*" : "" %>
+        <%= result.candidate %>
+        <span class="party"><%= result.party ? " - " + result.party : "" %></span>
+        <%= race.called && race.called * 1 == result.candidateID ? "&check;" : "" %>
+      </div>
+      <div class="votes">
+        <span class="numbers"><%= t.formatNumber(result.votes) %></span>
+      </div>
+      <% if (result.percent * 1) { %>
+      <div class="bar-container">
+        <div
+          class="bar <%= result.party %> <%= synonyms[result.candidate.toLowerCase()] %>"
+          style="width: <%= result.percent * .8 %>%">
+          <div class="percentage"><%= result.percent %>%
+          </div>
+        </div>
+      </div>
+      <% } %>
+    </li>
+  <% }) %>
+  </ul>
+
+  <% if (race.map) { %>
+  <div class="map-container county">
+    <savage-image class="county" data-src="assets/countyMap.svg" data-race="<%= race.id %>" role="img" aria-label="Map of results by county"></savage-image>
+  </div>
+  <% } %>
+</div>

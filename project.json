@@ -1,0 +1,22 @@
+{
+  "s3": {
+    "stage": {
+      "bucket": "projects-staging.seattletimes.com",
+      "path": "gutless-magpie"
+    },
+    "live": {
+      "bucket": "projects.seattletimes.com",
+      "path": "2016/election-results"
+    }
+  },
+  "title": "2016 Election Results",
+  "description": "Results for Seattle, surrounding counties, Washington, and national races by The Seattle Times",
+  "url": "http://projects.seattletimes.com/2016/election-results/",
+  "slug": "",
+  "tags": [],
+  "sheets": ["1BimTR7_2uQtL3uwGWW1d9S0wdzCg2KaNyr1HjNZV420"],
+  "image": "assets/social-banner.jpg",
+  "production": true,
+  "embedded": false,
+  "caching": false
+}

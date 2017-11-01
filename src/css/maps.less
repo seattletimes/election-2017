@@ -1,0 +1,128 @@
+@import "values";
+
+savage-image {
+
+  svg {
+    max-width: 100%;
+
+    .county {
+      stroke: #E0E0E0;
+      stroke-width: 2px;
+    }
+
+    .active {
+      stroke: white;
+      stroke-width: 5px;
+    }
+
+    .rep {
+      fill: @republican;
+    }
+
+    .dem {
+      fill: @democrat;
+    }
+
+    .yes {
+      fill: @y-fill;
+    }
+
+    .no {
+      fill: @n-fill;
+    }
+
+    .tie {
+      fill: #CCC;
+    }
+
+    .district {
+      stroke-width: 0px;
+    }
+
+    .highlight {
+      fill: @text-gray;
+    }
+
+    .null {
+      fill: @gray;
+      stroke-width: 0px;
+    }
+  }
+}
+
+.map-container {
+  position: relative;
+
+  &.county {
+    width: 400px;
+    max-width: 100%;
+    margin: 20px auto;
+  }
+
+  &::before {
+    display: block;
+    content: "";
+    padding-bottom: percentage(648 / 998);
+  }
+
+  savage-image, svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.popup {
+  background: white;
+  color: black;
+  box-shadow: 0 12px 16px rgba(0,0,0,.2);
+  position: absolute;
+  padding: 8px;
+  display: none;
+  z-index: 999;
+  width: 66%;
+
+  &.show {
+    display: block;
+
+    @media @mobile {
+      display: none;
+    }
+  }
+
+  .county {
+    text-transform: uppercase;
+  }
+
+  ul {
+    text-align: left;
+    margin: 0;
+    padding: 0 8px;
+    list-style-type: none;
+
+    li {
+      .display-flex();
+      .justify-content(space-between);
+      .align-items(flex-end);
+
+      @media @mobile {
+        display: block;
+      }
+    }
+
+    .candidate {
+      font-weight: bold;
+
+      @media @mobile {
+        display: block;
+      }
+    }
+
+    .spacer {
+      .flex(1 0 10px);
+      border-bottom: 1px dotted @df-light-gray;
+    }
+  }
+}

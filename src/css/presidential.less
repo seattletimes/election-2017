@@ -1,0 +1,95 @@
+.vs-container {
+  font-family: @df-sans;
+}
+
+header.vs {
+  .display-flex();
+
+  .half {
+    float: left;
+    width: 50%;
+
+    .above {
+      line-height: 1;
+      border-bottom-width: 4px;
+      border-bottom-style: solid;
+      border-bottom-color: @elex-blue;
+      .display-flex();
+      .align-items(flex-end);
+      .flex(0 0 100%);
+    }
+
+    .below {
+      .state-tiles {
+        padding: 0;
+        margin: 0;
+        display: block;
+      }
+
+      .tile {
+        background: @elex-blue;
+        color: white;
+        display: inline-block;
+        padding: 2px 3px;
+        border-radius: 2px;
+        margin-right: 3px;
+        margin-bottom: 3px;
+        font-size: 13px;
+        width: 2em;
+        text-align: center;
+      }
+    }
+
+    &.trump {
+      .above {
+        .flex-direction(row-reverse);
+        border-bottom-color: @elex-red;
+      }
+
+      .below {
+        text-align: right;
+
+        .tile {
+          background: @elex-red;
+          margin-right: 0;
+          margin-left: 3px;
+        }
+      }
+    }
+  }
+
+  .name {
+    font-size: 16px;
+    text-transform: uppercase;
+  }
+
+  .electoral.vote {
+    font-weight: bold;
+    font-size: 24px;
+    margin: 0 16px;
+  }
+}
+
+.map-container.presidency {
+  display: block;
+
+  &::before {
+    display: block;
+    content: "";
+    padding-bottom: percentage(560 / 640);
+  }
+
+  svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.votes-counted {
+  text-align: right;
+  font-size: 13px;
+  color: @df-middle-gray;
+}

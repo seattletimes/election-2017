@@ -1,0 +1,145 @@
+@import "values";
+
+//equivalent of ng-cloak
+svg-map {
+  display: none;
+  &[ready] {
+    display: block;
+  }
+}
+
+svg {
+  display: block;
+}
+
+.ad {
+  text-align: center;
+  display: block;
+
+  #adtopright {
+    white-space: nowrap;
+    & > img, & > div, & > a {
+      display: inline-block;
+    }
+    div {
+      float: none !important; //stupid ad code
+    }
+  }
+
+  // @media @mobile {
+  //   display: none;
+  // }
+}
+
+
+div.content {
+  max-width: 1024px;
+  margin: 10px auto;
+  overflow: auto;
+  padding: 0 16px;
+
+  @media @mobile {
+    margin: 0 auto;
+  }
+}
+
+header.hed {
+
+  .section-fronts {
+    font-size: 18px;
+
+    a {
+      font-weight: bold;
+    }
+  }
+
+  h1 {
+    margin: 10px 0 0;
+    font-family: @hed;
+    font-size: 40px;
+    display: block;
+
+    @media @mobile {
+      font-size: 24px;
+    }
+
+    img {
+      width: 400px;
+      display: block;
+    }
+  }
+
+  .dateline {
+    color: @text-gray;
+    font-size: 13px;
+    font-family: @df-sans;
+  }
+
+}
+
+@ad-size: 300px;
+
+.elections {
+  width: calc(~"100% - " @ad-size + 25px);
+  margin: 0 24px 24px 0;
+  float: left;
+
+  .cutline {
+    font-family: @serif;
+    //font-weight: bold;
+    font-size: 18px;
+    margin: 0;
+  }
+
+
+  @media @tablet {
+    width: 100%;
+    float: none;
+  }
+
+  .category {
+    display: none;
+
+    &.show {
+      display: block;
+    }
+  }
+
+  .subcategory {
+    display: none;
+
+    &.show {
+      display: block;
+    }
+  }
+}
+
+.rail {
+  width: @ad-size;
+  float: left;
+  text-align: center;
+
+  #adright {
+    & > a, & > div, & > img {
+      display: block;
+    }
+  }
+
+  @media @tablet {
+    float: none;
+    width: 100%;
+  }
+}
+
+.key {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+}
+
+footer.bottom {
+  clear: both;
+  background: #DDD;
+  padding: 24px;
+}
