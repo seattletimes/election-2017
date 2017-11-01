@@ -6,6 +6,7 @@ var isVerbose = process.argv.indexOf("--verbose") > -1;
 
 var sos = fs.readFileSync("temp/MediaResults.tsv");
 var sosCounty = fs.readFileSync("temp/MediaResultsByCounty.tsv");
+var incumbents = fs.readFileSync("temp/incumbents.csv");
 
 var raceColumns = "id name description category subcategory featured map locator called url filter".split(/\s+/);
 var candidateColumns = "race  id  name  party incumbent description original  filter".split(/\s+/);
@@ -22,10 +23,10 @@ var titleCase = function(s) {
 
 var races = {};
 
-var parse = function(contents) {
+var parse = function(contents, delimiter = "\t") {
   return new Promise(function(ok, fail) {
     csv.parse(contents, {
-      delimiter: "\t",
+      delimiter,
       columns: true
     }, function(err, rows) {
       if (err) return fail(err);
@@ -84,6 +85,9 @@ var init = async function() {
   var stateRows = await parse(sos);
   var countyRows = await parse(sosCounty);
 
+  var incumbency = {};
+  (await parse(incumbents, ",")).forEach(r => incumbency[r.BallotID] = "x");
+
   var rows = stateRows.concat(countyRows);
 
   // assemble unique race/candidate lists
@@ -106,7 +110,8 @@ var init = async function() {
       race: id,
       id: r.BallotID,
       name: r.BallotName,
-      party: fixParty(r.PartyName)
+      party: fixParty(r.PartyName),
+      incumbent: incumbency[r.BallotID]
     });
   });
 
