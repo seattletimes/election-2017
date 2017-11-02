@@ -80,6 +80,10 @@ var fixParty = function(p) {
   return p;
 };
 
+var fixName = function(n) {
+  return n.replace(/&#(\d+);/g, (_, code) => String.fromCharCode(code));
+}
+
 var init = async function() {
   
   var stateRows = await parse(sos);
@@ -109,7 +113,7 @@ var init = async function() {
     races[id].candidates.push({
       race: id,
       id: r.BallotID,
-      name: r.BallotName,
+      name: fixName(r.BallotName),
       party: fixParty(r.PartyName),
       incumbent: incumbency[r.BallotID]
     });
