@@ -37,6 +37,13 @@
 
           <%
           var groups = Object.keys(category.grouped);
+          if (cat == "Legislative") {
+            groups.sort(function(a, b) {
+              return a.replace(/district /i, "") * 1 - b.replace(/district /i, "") * 1;
+            });
+          } else {
+            groups.sort();
+          }
           if (groups.length) {
 
             if (groups.length && cat == "Local") { %>

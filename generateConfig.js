@@ -82,7 +82,7 @@ var fixParty = function(p) {
 
 var fixName = function(n) {
   return n.replace(/&#(\d+);/g, (_, code) => String.fromCharCode(code));
-}
+};
 
 var init = async function() {
   
@@ -101,13 +101,20 @@ var init = async function() {
     var county = r.CountyName;
     if (county && countyList.indexOf(county) == -1) return;
     var featureIndex = featured.indexOf(id) + 1;
+    var category = categories[type] || type || "Local";
+    var subcategory = r.CountyName;
+    if (category == "Legislative") {
+      subcategory = r.RaceName.match(/(district \d+)/i)[1];
+      r.RaceName = r.RaceName.replace(/Legislative District \d+ - /, "");
+    }
+
     if (!races[id]) races[id] = {
       id,
+      category,
+      subcategory,
       candidates: [],
       county: r.CountyName,
       name: titleCase(r.RaceName),
-      category: categories[type] || type || "Local",
-      subcategory: r.CountyName,
       featured: featureIndex || ""
     };
     races[id].candidates.push({
@@ -134,7 +141,20 @@ var init = async function() {
     outputCandidates.push(...race.candidates);
   }
 
-  outputRaces.sort((a, b) => (a.featured || Infinity) - (b.featured || Infinity));
+  outputRaces.sort(function(a, b) {
+    if (!a.featured && !b.featured) {
+      if (a.category < b.category) return -1;
+      if (a.category > b.category) return 1;
+      if (a.category == b.category && a.category == "Legislative") {
+        return a.subcategory.replace(/district /i, "") * 1 - b.subcategory.replace(/district /i, "") * 1;
+      }
+      if (a.subcategory > b.subcategory) return -1;
+      if (a.subcategory < b.subcategory) return 1;
+      return a.id - b.id;
+    } else {
+      return (a.featured || Infinity) - (b.featured || Infinity);
+    }
+  });
 
   fs.writeFileSync("temp/races.csv", await serialize(outputRaces, raceColumns));
   fs.writeFileSync("temp/candidates.csv", await serialize(outputCandidates, candidateColumns));
