@@ -19,7 +19,7 @@
         </div>
         <h1>
           <img src="./assets/elex-logo-text.svg" alt="2016 election results for Washington state" class="head-logo">
-          Results for statewide and local races
+          Statewide and local results
         </h1>
         <p class="dateline">Last updated: <%= election.updated %> with
           <%= election.turnout.percentage %>% of expected ballots counted statewide
@@ -27,7 +27,7 @@
 
       <main class="elections">
         <p class="cutline">
-          View state and local election results by race and see county-by-county results for key statewide races. Uncontested races are not included. For complete Washington state results, visit the <a href="http://results.vote.wa.gov/results/current/">Washington Secretary of State</a>. Visit <a href="https://www.seattletimes.com/seattle-news/politics/election-day-live-updates-seattle-area-voters-share-their-top-picks/">our Election 2017 live updates</a> for more coverage.
+          View state and local election results by race and see county-by-county results for key statewide races. Uncontested races are not included. For complete Washington state results, visit the <a href="http://results.vote.wa.gov/results/current/">Washington Secretary of State</a>. Go to <a href="https://www.seattletimes.com/seattle-news/politics/election-day-live-updates-seattle-area-voters-share-their-top-picks/">our Election 2017 live updates</a> for more coverage.
 
         <%= t.include("_tabs.html") %>
         <article>
@@ -88,8 +88,8 @@
           <%= t.include("_tabs.html") %>
 
           <ul class="key">
-            <li> * indicates incumbent
-            <li> ** indicates measure must meet specific minimum turnout and 60% yes-vote requirements
+            <li> * Incumbent
+            <!-- <li> ** Measure must meet specific minimum turnout and 60% yes-vote requirements -->
             <li> Races that cross county borders include vote totals from all jurisdictions.
           </li>
         </article>

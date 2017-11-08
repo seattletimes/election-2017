@@ -10,8 +10,9 @@ var synonyms = {
 };
 %>
 <div class="result-block">
-  <h3><%= race.name %>
-  <%
+  <h3><%= race.name %><%
+  if (race.category == "Legislative") { %>, <%= race.subcategory %>
+  <% } 
   if (cat == "Congressional") { %>
     <span class="map-icon">Map
       <savage-image

@@ -13,8 +13,6 @@
 
       <img class="banner" src="./assets/star-banner.svg">
 
-      <h2>Local results</h2>
-
       <div class="races">
 
         <% election.widget.forEach(function(race) { %>
@@ -28,7 +26,11 @@
               <% if (race.called && race.called == result.candidateID) { %>
               <span class="checkmark">&#10004;</span>
               <% } %>
-              <span class="name"><%= result.candidate %></span>
+              <span class="name">
+                <%= result.candidate %>
+                <%= result.incumbent ? " * " : "" %>
+                <%= result.party ? "- " + result.party : "" %>
+              </span>
               <span class="spacer"></span>
               <span class="percent"><%= result.percent || "0.0" %>%</span>
           <% }) %>
@@ -42,7 +44,8 @@
 
       <div class="links">
         <a class="full-results" target="_parent" href="http://projects.seattletimes.com/2017/election-results/">See all results &raquo;</a>
-        Updated: <%= election.updated %>
+        Updated: <%= election.updated %><br>
+        * Incumbent
       </div>
     </responsive-child>
 
