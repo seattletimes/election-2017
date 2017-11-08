@@ -19,18 +19,19 @@ var getPage = function(key) {
     request({ uri: url }, function(err, response, body) {
       var md5 = crypto.createHash("md5").update(body, "utf8");
       var hash = md5.digest("hex");
+      var updated = false;
       if (!results[key]) {
         console.log(`Setting cache for %s - ${chalk.yellow("%s")}`, key, hash);
-        results[key] = hash;
       } else {
         if (results[key] !== hash) {
           console.log(chalk.red("!!!!!!!! UPDATE ON %s !!!!!!!!!"), key);
-          return ok(true);
+          updated = true;
         } else {
           console.log(`No change on %s - ${chalk.green("%s")}`, key, hash);
         }
       }
-      ok(false);
+      results[key] = hash;
+      ok(updated);
     });
   });
 };
@@ -56,6 +57,7 @@ var check = async function() {
   var updated = results.filter(d => d).length;
   if (updated) {
     await publish();
+    console.log("\n============ Publish complete! ============\n");
   }
   await delay(1000 * 60 * 2);
   check();
