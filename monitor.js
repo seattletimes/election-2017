@@ -12,6 +12,7 @@ var pages = {
 };
 
 var results = {};
+var since = 0;
 
 var getPage = function(key) {
   return new Promise(function(ok, fail) {
@@ -53,11 +54,15 @@ var check = async function() {
   var keys = Object.keys(pages);
   console.log("============\nPolling: %s\n============", new Date());
   var results = await Promise.all(keys.map(k => getPage(k)));
+  console.log(since + " scrapes since last update");
   console.log("============\n\n")
   var updated = results.filter(d => d).length;
   if (updated) {
+    since = 0;
     await publish();
     console.log("\n============ Publish complete! ============\n");
+  } else {
+    since++;
   }
   await delay(1000 * 60 * 2);
   check();
