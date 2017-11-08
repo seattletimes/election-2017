@@ -27,7 +27,7 @@
 
       <main class="elections">
         <p class="cutline">
-          View state and local election results by race and see county-by-county results for key statewide races. Uncontested races are not included. For complete Washington state results, visit the <a href="http://results.vote.wa.gov/results/current/">Washington Secretary of State</a>. Visit <a href="http://www.seattletimes.com/seattle-news/politics/live-updates-from-election-day-2016/">our Election 2016 live updates</a> for more coverage.
+          View state and local election results by race and see county-by-county results for key statewide races. Uncontested races are not included. For complete Washington state results, visit the <a href="http://results.vote.wa.gov/results/current/">Washington Secretary of State</a>. Visit <a href="https://www.seattletimes.com/seattle-news/politics/election-day-live-updates-seattle-area-voters-share-their-top-picks/">our Election 2017 live updates</a> for more coverage.
 
         <%= t.include("_tabs.html") %>
         <article>
@@ -37,21 +37,18 @@
 
           <%
           var groups = Object.keys(category.grouped);
-          if (cat == "Legislative") {
-            groups.sort(function(a, b) {
-              return a.replace(/district /i, "") * 1 - b.replace(/district /i, "") * 1;
-            });
-          } else {
-            groups.sort();
-          }
           if (groups.length) {
 
-            if (groups.length && cat == "Local") { %>
+            if (cat == "Local") { %>
             <p class="subnav-controls">Select a county: <select class="subnav">
-              <% groups.sort().forEach(function(group) { %>
+              <% groups.slice().sort().forEach(function(group) { %>
               <option value="<%= group %>"><%= group %></option>
               <% }); %>
             </select></p> <%
+            } else if (cat == "Legislative") {
+              groups.sort(function(a, b) {
+                return a.replace(/district /i, "") * 1 - b.replace(/district /i, "") * 1;
+              });
             }
 
             groups.forEach(function(group) { %>

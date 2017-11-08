@@ -24,7 +24,7 @@ var getDateline = function() {
   } else {
     time = hours - 12 + ":" + minutes + " pm";
   }
-  return month + " " + day + ", 2016 at " + time;
+  return month + " " + day + ", 2017 at " + time;
 };
 
 module.exports = function(grunt) {

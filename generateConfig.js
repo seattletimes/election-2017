@@ -117,7 +117,13 @@ var init = async function() {
       name: titleCase(r.RaceName),
       featured: featureIndex || ""
     };
-    races[id].candidates.push({
+    var race = races[id];
+    if (race.county != r.CountyName) {
+      // add in multi-county races
+      race.county += "," + r.CountyName;
+    }
+    var exists = race.candidates.filter(c => c.id == r.BallotID).length;
+    if (!exists) race.candidates.push({
       race: id,
       id: r.BallotID,
       name: fixName(r.BallotName),
@@ -141,20 +147,7 @@ var init = async function() {
     outputCandidates.push(...race.candidates);
   }
 
-  outputRaces.sort(function(a, b) {
-    if (!a.featured && !b.featured) {
-      if (a.category < b.category) return -1;
-      if (a.category > b.category) return 1;
-      if (a.category == b.category && a.category == "Legislative") {
-        return a.subcategory.replace(/district /i, "") * 1 - b.subcategory.replace(/district /i, "") * 1;
-      }
-      if (a.subcategory > b.subcategory) return -1;
-      if (a.subcategory < b.subcategory) return 1;
-      return a.id - b.id;
-    } else {
-      return (a.featured || Infinity) - (b.featured || Infinity);
-    }
-  });
+  outputRaces.sort((a, b) => (a.featured || Infinity) - (b.featured || Infinity));
 
   fs.writeFileSync("temp/races.csv", await serialize(outputRaces, raceColumns));
   fs.writeFileSync("temp/candidates.csv", await serialize(outputCandidates, candidateColumns));
