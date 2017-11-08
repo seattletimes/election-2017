@@ -31,7 +31,7 @@ var synonyms = {
   </h3>
 
   <% if (race.description) { %>
-  <p class="description"><%= race.description %></p>
+  <p class="description"><%= race.description.trim() %></p>
   <% } %>
 
   <ul class="results">
