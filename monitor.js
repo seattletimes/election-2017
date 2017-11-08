@@ -37,7 +37,7 @@ var getPage = function(key) {
 
 var publish = function() {
   return new Promise(function(ok, fail) {
-    var child = spawn("grunt", "sheets static publish:live".split(" "), { stdio: "inherit" });
+    var child = spawn("grunt.cmd", "sheets static publish:live".split(" "), { stdio: "inherit" });
     child.on("close", function() {
       ok();
     });
