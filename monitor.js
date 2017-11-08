@@ -4,6 +4,7 @@ var crypto = require("crypto");
 var chalk = require("chalk");
 var spawn = require("child_process").spawn;
 
+
 var pages = {
   sos: "http://results.vote.wa.gov/results/current/export/MediaResults.txt",
   sosCounty: "http://results.vote.wa.gov/results/current/export/MediaResultsByCounty.txt",
@@ -18,8 +19,6 @@ var getPage = function(key) {
     request({ uri: url }, function(err, response, body) {
       var md5 = crypto.createHash("md5").update(body, "utf8");
       var hash = md5.digest("hex");
-      var updated = false;
-      // console.log(key, hash);
       if (!results[key]) {
         console.log(`Setting cache for %s - ${chalk.yellow("%s")}`, key, hash);
         results[key] = hash;
@@ -28,7 +27,7 @@ var getPage = function(key) {
           console.log(chalk.red("!!!!!!!! UPDATE ON %s !!!!!!!!!"), key);
           return ok(true);
         } else {
-          console.log(`no change on %s - ${chalk.green("%s")}`, key, hash);
+          console.log(`No change on %s - ${chalk.green("%s")}`, key, hash);
         }
       }
       ok(false);
@@ -45,6 +44,10 @@ var publish = function() {
   });
 };
 
+var delay = function(duration) {
+  return new Promise(ok => setTimeout(ok, duration));
+};
+
 var check = async function() {
   var keys = Object.keys(pages);
   console.log("============\nPolling: %s\n============", new Date());
@@ -54,7 +57,8 @@ var check = async function() {
   if (updated) {
     await publish();
   }
-  setTimeout(check, 1000 * 60 * 2);
+  await delay(1000 * 60 * 2);
+  check();
 };
 
 check();
