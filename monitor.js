@@ -64,7 +64,7 @@ var check = async function() {
   } else {
     since++;
   }
-  await delay(1000 * 60 * 2);
+  await delay(1000 * 60 * 10);
   check();
 };
 
