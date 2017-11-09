@@ -11,24 +11,27 @@ var pages = {
   turnout: "http://results.vote.wa.gov/results/current/export/MediaVoterTurnout.txt"
 };
 
+var len = Math.max(...Object.keys(pages).map(s => s.length));
+
 var results = {};
 var since = 0;
 
 var getPage = function(key) {
   return new Promise(function(ok, fail) {
     var url = pages[key];
+    var padded = key.padEnd(len);
     request({ uri: url }, function(err, response, body) {
       var md5 = crypto.createHash("md5").update(body, "utf8");
       var hash = md5.digest("hex");
       var updated = false;
       if (!results[key]) {
-        console.log(`Setting cache for %s - ${chalk.yellow("%s")}`, key, hash);
+        console.log(`Setting cache for %s - ${chalk.yellow("%s")}`, padded, hash);
       } else {
         if (results[key] !== hash) {
-          console.log(chalk.red("!!!!!!!! UPDATE ON %s !!!!!!!!!"), key);
+          console.log(chalk.red("!!!!!!!! UPDATE ON %s - %s !!!!!!!!!"), padded, hash);
           updated = true;
         } else {
-          console.log(`No change on %s - ${chalk.green("%s")}`, key, hash);
+          console.log(`No change on %s - ${chalk.green("%s")}`, padded, hash);
         }
       }
       results[key] = hash;
@@ -64,7 +67,7 @@ var check = async function() {
   } else {
     since++;
   }
-  await delay(1000 * 60 * 10);
+  await delay(1000 * 60 * 5);
   check();
 };
 
