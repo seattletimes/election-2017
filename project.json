@@ -2,7 +2,7 @@
   "s3": {
     "stage": {
       "bucket": "projects-staging.seattletimes.com",
-      "path": "home-believer"
+      "path": "eastern-trigger"
     },
     "live": {
       "bucket": "projects.seattletimes.com",
