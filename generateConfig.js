@@ -48,7 +48,9 @@ var serialize = function(rows, columns) {
 };
 
 var categories = {
-  "State Executive": "Statewide"
+  "State Executive": "Statewide",
+  "Congressional": "U.S. House",
+  "Federal": "U.S. Senate"
 };
 var countyList = [
   "Pierce",

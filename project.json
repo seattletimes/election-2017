@@ -6,7 +6,7 @@
     },
     "live": {
       "bucket": "projects.seattletimes.com",
-      "path": "2017/election-results"
+      "path": "2018/election-results"
     }
   },
   "title": "2017 Election Results",

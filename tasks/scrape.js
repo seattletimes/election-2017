@@ -11,7 +11,7 @@ var shell = require("shelljs");
 var getDateline = function() {
   //find the current dateline
   var now = new Date();
-  var month = ["August", "October", "November", "December"][now.getMonth() - 9];
+  var month = ["August", "October", "November", "December"][now.getMonth() - 7];
   var day = now.getDate();
   var hours = now.getHours();
   var minutes = now.getMinutes() + "";
@@ -20,9 +20,9 @@ var getDateline = function() {
   }
   var time;
   if (hours < 13) {
-    time = hours + ":" + minutes + " am";
+    time = hours + ":" + minutes + " a.m.";
   } else {
-    time = hours - 12 + ":" + minutes + " pm";
+    time = hours - 12 + ":" + minutes + " p.m.";
   }
   return month + " " + day + ", 2018 at " + time;
 };
@@ -134,7 +134,7 @@ module.exports = function(grunt) {
         all: races,
         categorized: categorized,
         // move Key Races to the front
-        categories: ["Key Races", "Federal", "Congressional", "Judicial", "Legislative", "Local"],
+        categories: ["Key Races", "Senate", "House", "Judicial", "Legislative", "Local"],
         mapped: countyData.mapped,
         zoomed: [1,11,21,23,25,26,27,28,29,30,32,33,34,36,37,38,41,43,44,45,46,47,48],
         turnout: turnout,
